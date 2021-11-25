@@ -22,7 +22,6 @@ function LinkedList() {
             }
 
             current.next = node
-
         }
 
         length++
@@ -34,6 +33,27 @@ function LinkedList() {
 
     this.removeAt = function(position) {
         // Remove o elemento de uma posição específica
+        if(position > - -1 && position < length)
+        {
+            let current = head
+            let previous
+            let index = 0
+
+            if(position === 0) {
+                head = current.next
+            }else {
+                while(index++ < position)
+                {
+                    previous = current
+                    current = current.next
+                }
+                previous.next = current.next
+            }
+            length--
+            return current.element
+        } else {
+            return null
+        }
     }
 
     this.remove = function(element) {
@@ -54,9 +74,26 @@ function LinkedList() {
 
     this.toString = function() {
         // Converte a string
+        let current = head
+        let string = ''
+
+        while(current) {
+            string += current.element + ' '
+            current = current.next
+        }
+
+        return string
     }
 
     this.print = function() {
         // Imprimir os valores
+        console.log(this.toString())
     }
 }
+
+let listaLigadas = new LinkedList()
+listaLigadas.append('Joao')
+listaLigadas.print()
+listaLigadas.append('Jose')
+listaLigadas.append('Maria')
+listaLigadas.print()
