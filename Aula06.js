@@ -8,15 +8,15 @@ function LinkedList() {
     let head = null
     
     this.append = function(element) {
-        // Adicionar um elemento no final da lista
+        //Adicionar um elemento no final da lista
         let node = new Node(element)
-        let current // posição atual
-
-        if(head === null) {
-            head => node
+        let current
+        
+        if(head === null){
+            head = node
         } else {
-            current = head  // head passa a ser a posição atual
-            
+            current = head
+
             while(current.next) {
                 current = current.next
             }
@@ -24,49 +24,49 @@ function LinkedList() {
             current.next = node
         }
 
-        length++
+        length++ 
     }
 
-    this.insert = function(position, element) {
-        // Adicionar o elemento de uma posição específica
+    this.insert = function(position, element){
+        //Adicionar o elemento de uma posição especifica
         if(position > -1 && position <= length)
         {
-            let node = new Node(element)
-            let current = head
-            let previous
-            let index = 0
+           let node = new Node(element)
+           let current = head
+           let previous
+           let index = 0
+           
+           if(position === 0){
+               node.next = current
+               head = node
+           } else {
+               while(index++ < position)
+               {
+                   previous = current
+                   current = current.next
+               }
 
-            if(position === 0 ) {
-                node.next = current
-                head = node
+               node.next = current
+               previous.next = node
+           }
+           length++
+           return true
         } else {
-            while(index++ < position)
-            {
-                previous = current
-                current = currente.next
-            }
-
-            node.next = current
-            previous.next = node
+            return false
         }
-        length++
-        return true
-    } else {
-        return false
     }
-}
 
     this.removeAt = function(position) {
-        // Remove o elemento de uma posição específica
-        if(position > - -1 && position < length)
+        //remove o elemento de uma posição especifica
+        if(position > -1 && position < length)
         {
             let current = head
-            let previous
+            let previous 
             let index = 0
 
             if(position === 0) {
                 head = current.next
-            }else {
+            } else {
                 while(index++ < position)
                 {
                     previous = current
@@ -82,27 +82,42 @@ function LinkedList() {
     }
 
     this.remove = function(element) {
-        // Remove o elemento
+        //remove o elemento
+        let index = this.indexOf(element)
+        return this.removeAt(index)
     }
 
-    this.indexOf = function(elemento) {
-        // Retorna a posição do nó
+    this.indexOf = function(element) {
+        //retorna a posição do nó
+        let current = head
+        let index = 0
+
+        while(current) {
+            if(element === current.element) {
+                return index
+            }
+            index++
+            current = current.next
+        }
+        return -1
     }
 
     this.isEmpty = function() {
-        // Retorna se está vazia ou não
+        //retorna se está vazia 
+        return length === 0
     }
 
     this.size = function() {
-        // Retorna o tamanho da lista
+        //retonar o tamanho da lista
+        return length
     }
 
     this.toString = function() {
-        // Converte a string
+        //converte em string
         let current = head
         let string = ''
 
-        while(current) {
+        while(current){
             string += current.element + ' '
             current = current.next
         }
@@ -111,14 +126,17 @@ function LinkedList() {
     }
 
     this.print = function() {
-        // Imprimir os valores
+        //imprimir os valores
         console.log(this.toString())
     }
 }
 
 let listaLigadas = new LinkedList()
-listaLigadas.append('Joao')
-listaLigadas.print()
-listaLigadas.append('Jose')
+listaLigadas.append('João')
+listaLigadas.append('José')
 listaLigadas.append('Maria')
+listaLigadas.append('Lucas')
 listaLigadas.print()
+console.log(listaLigadas.indexOf('José'))
+console.log(listaLigadas.indexOf('Maria'))
+console.log(listaLigadas.indexOf('Lucas'))
